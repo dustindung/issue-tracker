@@ -17,4 +17,5 @@ export const patchIssueSchema = z.object({
     .min(1, "AssignedToUserId is required")
     .optional()
     .nullable(),
+  status: z.enum(["OPEN", "IN_PROGRESS", "CLOSED"]).optional(),
 });
