@@ -49,7 +49,13 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 const useUsersQuery = () =>
   useQuery<User[]>({
     queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then((res) => res.data),
+    queryFn: () =>
+      axios
+        .get("/api/users")
+        .then((res) => res.data)
+        .catch(() => {
+          throw new Error("Failed to fetch users");
+        }),
     staleTime: 60 * 60 * 1000,
     retry: 3,
   });
